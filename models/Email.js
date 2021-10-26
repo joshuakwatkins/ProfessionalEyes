@@ -31,3 +31,5 @@ Email.init(
     modelName: "email",
   }
 );
+
+module.exports = Email;
