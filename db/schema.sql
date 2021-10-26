@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS cleancomm_db;
+CREATE DATABASE cleancomm_db;
