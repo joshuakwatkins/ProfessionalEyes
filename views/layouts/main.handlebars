@@ -6,33 +6,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clean Comm</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="icon" href="assets/broom-icon.png">
   <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
-<body>
-    <header class='container-fluid bg-secondary text-black'>
-        <h1 class='display-1'>Welcome to Clean Comm</h1>
-    </header>
+<body class="p-3 mb-2 bg-light text-dark">
+  <div class='justify-space-around'>
+    <header class='container-fluid bg-secondary text-black d-flex justify-space-between'>
+      <h1 class='display-1'>Welcome to Clean Comm</h1>
+       <div class='d-flex flex-row-reverse bd-highlight'>
+         <div class="d-flex justify-content-end">
+           <button id='loginButton' class="btn btn-dark">Login</button>
+         </div>
+       </div>
+     </header>
+  </div>
 
     <div class="container">
         <div class="row align-items-start">
           <div class="col mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">USER INPUT</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="emailInput" rows="3"></textarea>
           </div>
           <div class="col">
             OPTIONS
+            <div class="card">
+              <div class="card-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Positive
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Negative
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row align-items-end">
             <div class="col">
               ANALYSIS
+              <div class="card border border-secondary">
+                <div class="card-body">
+                  <p id='analyticalOutput'>
+
+                  </p>
+                  </div>
+              </div>
             </div>
             <div class="col">
               NEUTRAL
+              <div class="card border border-primary">
+                <div class="card-body">
+                  <p id='neutralOutput'>
+
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="col">
-              HOSTILE/LOVING
+              POSITIVE/NEGATIVE
+              <div class="card border border-danger">
+                <div class="card-body">
+                  <p id='emotionalOutput'>
+
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
