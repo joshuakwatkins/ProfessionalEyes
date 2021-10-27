@@ -45,5 +45,7 @@ module.exports = {
     }
     return textArray;
   },
-  format_profanity: (email) => {},
+  format_profanity: (email) => {
+    //hello
+  },
 };
