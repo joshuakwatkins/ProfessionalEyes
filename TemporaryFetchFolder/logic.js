@@ -2,7 +2,7 @@ const textSyntaxArray = [];
 const text = "Hello there mean head, I can't stand you and hope you trip and fall to your death. Fuck Shit Dick Bitch YES WEEEEE WOOP";
 const textArray = text.split(" ");
 
-textArray.forEach(element => textSyntaxArray.push("%20" + element));
+textArray.forEach((element) => textSyntaxArray.push("%20" + element));
 const partialJoin = textSyntaxArray.join("");
 
 console.log(partialJoin);
@@ -96,7 +96,7 @@ const theCheckboxes = document.querySelector("#upperToLowerCase");
 //     }
     
     
-}        
+// }        
 if (moreThanOneCap.length >= 1) {
     upperCaseToLowerCase();
 }
