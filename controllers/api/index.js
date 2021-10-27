@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+const router = require('express').Router();
+
+const emailRoutes = require("./emailRoutes");
+const userRoutes = require("./userRoutes");
+=======
 const router = require("express").Router();
 
 const emailRoutes = require("./emailRoutes");
@@ -9,3 +15,4 @@ fetch(
 )
   .then((response) => response.json())
   .then((data) => console.log(data));
+>>>>>>> df03085594e1e741d9e052cc86a6436db7e6742c
