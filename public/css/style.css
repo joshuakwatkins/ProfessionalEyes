@@ -2,8 +2,18 @@ header {
   position: relative;
 }
 
+div.container {
+  padding: 50px;
+}
+
 div button {
   position: absolute;
   right: 10px;
   top: 5px;
+  margin-top: 30px;
+}
+
+button.profile {
+  margin-right: 70px;
+  margin-top: 30px;
 }
