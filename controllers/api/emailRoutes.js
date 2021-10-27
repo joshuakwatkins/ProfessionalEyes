@@ -22,7 +22,7 @@ router.post('/cleanse', withAuth, async (req, res) => {
     const toClean = req.body.body;
     const compArr = toClean.split(" ");
     const wordAnalysis = analyzeFetch(toClean);
-    const colorSpans = format_color(wordAnalysis, toClean);
+    const colorSpans = format_color(wordAnalysis);
 
     for (var i = 0; i > wordAnalysis.keywords.length; i++) {
         compArr.find(wordAnalysis.keywords[i].word)
