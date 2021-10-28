@@ -33,13 +33,14 @@
         <div class="row align-items-start">
           <div class="col mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">USER INPUT</label>
-            <textarea class="form-control" id="draftInput" rows="3"></textarea>
+            <textarea class="form-control" id="emailInput" rows="3"></textarea>
           </div>
           <div class="col">
             OPTIONS
             <div class="card">
               <div class="card-body">
                 <div class="form-check">
+                <button class="clean btn btn-primary">Cleanse</button>
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="positiveRadio" checked>
                   <label class="form-check-label" for="flexRadioDefault1">
                     Positive
@@ -51,7 +52,6 @@
                     Negative
                   </label>
                 </div>
-                <button>Cleanse</button>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
             <div class="col">
               ANALYSIS
               <div class="card border border-secondary">
-                <div class="card-body">
+                <div class="card-body-one">
                   <p id='analyticalOutput'>
                   </p>
                   </div>
@@ -69,7 +69,7 @@
             <div class="col">
               NEUTRAL
               <div class="card border border-primary">
-                <div class="card-body">
+                <div class="card-body-two">
                   <p id='neutralOutput'>
                   </p>
                 </div>
@@ -78,7 +78,7 @@
             <div class="col">
               POSITIVE/NEGATIVE
               <div class="card border border-danger">
-                <div class="card-body">
+                <div class="card-body-three">
                   <p id='emotionalOutput'>
                   </p>
                 </div>

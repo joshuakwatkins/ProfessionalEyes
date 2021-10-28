@@ -18,22 +18,11 @@ button.profile {
   margin-top: 30px;
 };
 
-bg-darkgreen {
+span.score {
   font-weight: bolder;
 };
 
-bg-lightgreen {
-  font-weight: bolder;
-};
-
-bg-green {
-  font-weight: bolder;
-};
-
-bg-yellow {
-  font-weight: bolder;
-};
-
-bg-red {
-  font-weight: bolder;
+button.clean {
+  background-color: darkblue;
+  border-color: black;
 }
