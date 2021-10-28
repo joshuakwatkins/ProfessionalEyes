@@ -3,11 +3,14 @@ const analyzeFetch = require("../../utils/analyzeFetch");
 const { Email, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 const format_color = require("../../utils/helpers");
+const profanityFetch = require("../../utils/profanity");
+const getNegWords = require("../../utils/negativeWords");
 
-router.post("/cleanse", withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
     const newEmail = Email.create({
-      body: req.body.body,
+      name: req.body.name,
+      body: req.body.emailInput,
       user_id: req.session.user_id,
     });
     if (!newEmail) {
@@ -18,10 +21,11 @@ router.post("/cleanse", withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  const toClean = req.body.body;
-  const compArr = toClean.split(" ");
+  const toClean = req.body.emailInput;
+  const compArr = await profanityFetch(toClean);
   const wordAnalysis = await analyzeFetch(toClean);
   const colorSpans = await format_color(wordAnalysis);
+  const negWords = await getNegWords(wordAnalysis);
 
   for (var i = 0; i > wordAnalysis.keywords.length; i++) {
     // compArr.find(wordAnalysis.keywords[i].word)
