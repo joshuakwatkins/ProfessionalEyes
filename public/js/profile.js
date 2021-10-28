@@ -1,13 +1,13 @@
 const newFormHandler = async (event) => {
     event.preventDefault();
   
-    const name = document.querySelector('#draft-name').value.trim();
-    const draftInput = document.querySelector('#draft-input').value.trim();
+    const name = document.querySelector('#email-name').value.trim();
+    const emailInput = document.querySelector('#email-input').value.trim();
   
-    if (name && draftInput) {
-      const response = await fetch(`/api/drafts`, {
+    if (name && emailInput) {
+      const response = await fetch(`/api/emails`, {
         method: 'POST',
-        body: JSON.stringify({ name, draftInput }),
+        body: JSON.stringify({ name, emailInput }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -16,7 +16,7 @@ const newFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/profile');
       } else {
-        alert('Failed to create draft');
+        alert('Failed to create email');
       }
     }
   };
@@ -25,22 +25,22 @@ const newFormHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
   
-      const response = await fetch(`/api/drafts/${id}`, {
+      const response = await fetch(`/api/emails/${id}`, {
         method: 'DELETE',
       });
   
       if (response.ok) {
         document.location.replace('/profile');
       } else {
-        alert('Failed to delete draft');
+        alert('Failed to delete email');
       }
     }
   };
   
   document
-    .querySelector('.new-draft-form')
+    .querySelector('.new-email-form')
     .addEventListener('submit', newFormHandler);
   
   document
-    .querySelector('.draft-list')
+    .querySelector('.email-list')
     .addEventListener('click', delButtonHandler);
