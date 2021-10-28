@@ -142,7 +142,11 @@ console.log(partialJoin);
 
 // Testing negative word for synonym fetches.
 
-const fakeText = ["I think you're bad and I want to hit you.  I hope you fail and die."]
+const fakeText = "I think you're bad and I want to hit you.  I hope you fail and die."
+const fakeTextSplitSynonyms = fakeText.split(" ");
+const fakeTextSplitAntonynms = fakeText.split(" ");
+const newTextSynonyms = [];
+const newTextAntonyms = [];
 
 const negTest = ["bad", "hit", "die", "fail"];
 const negFetchURL = [];
@@ -164,18 +168,114 @@ negFetchURL.forEach((element) => thesaurusCall(element))
 
 
 const wordsWeWillSwitch = [];
+
 const switchWords = (data) => {
+
+    if (data[0].meta.syns.length>0 && data[0].meta.ants.length>0){
+
     const randomArray = Math.floor(Math.random()*data[0].meta.syns.length);
     const randomWord = Math.floor(Math.random()*data[0].meta.syns[randomArray].length);
+    const randomArrayA = Math.floor(Math.random()*data[0].meta.ants.length);
+    const randomWordA = Math.floor(Math.random()*data[0].meta.ants[randomArrayA].length);
+    
     const switchingWords = 
     {
         hwi: data[0].hwi.hw,
-        synonym: data[0].meta.syns[randomArray][randomWord]
+        synonym: data[0].meta.syns[randomArray][randomWord],
+        antonym: data[0].meta.ants[randomArrayA][randomWordA]
+    };
+    
+    const replaceTheText = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitSynonyms.indexOf(element)
+            fakeTextSplitSynonyms.splice(indexNum, 1, switchingWords.synonym)
+        }
     }
-    wordsWeWillSwitch.push(switchingWords);
+    fakeTextSplitSynonyms.forEach((element) => replaceTheText(element))
+    
+    const replaceTheTextA = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitAntonynms.indexOf(element)
+            fakeTextSplitAntonynms.splice(indexNum, 1, switchingWords.antonym)
+        }
+    }
+    fakeTextSplitAntonynms.forEach((element) => replaceTheTextA(element))
+
+    } else if (data[0].meta.syns.length>0 && data[0].meta.ants.length<=0) {
+
+    const randomArray = Math.floor(Math.random()*data[0].meta.syns.length);
+    const randomWord = Math.floor(Math.random()*data[0].meta.syns[randomArray].length);
+
+    const switchingWords = 
+    {
+        hwi: data[0].hwi.hw,
+        synonym: data[0].meta.syns[randomArray][randomWord],
+        antonym: "There are no antonyms for this word"
+    };
+    const replaceTheText = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitSynonyms.indexOf(element)
+            fakeTextSplitSynonyms.splice(indexNum, 1, switchingWords.synonym)
+        }
+    }
+    fakeTextSplitSynonyms.forEach((element) => replaceTheText(element))
+
+    const replaceTheTextA = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitAntonynms.indexOf(element)
+            fakeTextSplitAntonynms.splice(indexNum, 1, switchingWords.antonym)
+        }
+    }
+    fakeTextSplitAntonynms.forEach((element) => replaceTheTextA(element))
+
+    } else if (data[0].meta.syns.length<=0 && data[0].meta.ants.length>0) {
+
+    const randomArrayA = Math.floor(Math.random()*data[0].meta.ants.length);
+    const randomWordA = Math.floor(Math.random()*data[0].meta.ants[randomArrayA].length);
+
+    const switchingWords = 
+    {
+        hwi: data[0].hwi.hw,
+        synonym: "There are no synonyms for this word.",
+        antonym: data[0].meta.ants[randomArrayA][randomWordA]
+    };
+    const replaceTheText = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitSynonyms.indexOf(element)
+            fakeTextSplitSynonyms.splice(indexNum, 1, switchingWords.synonym)
+        }
+    }
+    fakeTextSplitSynonyms.forEach((element) => replaceTheText(element))
+
+    const replaceTheTextA = (element) => {
+        if (element === switchingWords.hwi) {
+            const indexNum = fakeTextSplitAntonynms.indexOf(element)
+            fakeTextSplitAntonynms.splice(indexNum, 1, switchingWords.antonym)
+        }
+    }
+    fakeTextSplitAntonynms.forEach((element) => replaceTheTextA(element))
+
+}  else if (data[0].meta.syns.length<=0 && data[0].meta.ants.length<=0) {
+    console.log("There are no synonyms or antonyms.")
+}; 
+
+newTextSynonyms.push = fakeTextSplitSynonyms.join(" ");
+newTextAntonyms.push = fakeTextSplitAntonynms.join(" ");
 }
 
-console.log(wordsWeWillSwitch);
+console.log(newTextSynonyms)
+console.log(newTextAntonyms)
 
+
+// const replaceThatText = (element) => {
+//     console.log(wordsWeWillSwitch.length)
+//     console.log(fakeTextSplitSynonyms.indexOf(fakeTextSplit.includes(wordsWeWillSwitch[element].hwi)))
+//    const newText = fakeText.replace(/wordsWeWillSwitch[element].hwi/gi, wordsWeWillSwitch[element].synonym);
+//    fakeTextSplit.push(newText);
+// }
+// wordsWeWillSwitch.forEach((element) => replaceThatText(element));
+
+
+// console.log(fakeTextSplit)
+// console.log(wordsWeWillSwitch.length)
 // Pick a synonym out to replace a bad word with.
-
