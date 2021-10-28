@@ -25,4 +25,14 @@ span.score {
 button.clean {
   background-color: darkblue;
   border-color: black;
+};
+
+button.copy {
+  position: static;
+  background-color: darkblue;
+  border-color: black;
+};
+
+div.cardOne {
+  margin-top: 100px;
 }
