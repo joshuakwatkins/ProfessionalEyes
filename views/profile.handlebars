@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome back {{name}}</h2>
+  </div>
+</div>
+
+{{#if drafts.length}}
+  <div class="col-md-6 draft-list">
+    <h3>Saved Drafts:</h3>
+
+    {{#each drafts as |draft|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/draft/{{draft.id}}">{{draft.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{draft.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/profile.js"></script>
