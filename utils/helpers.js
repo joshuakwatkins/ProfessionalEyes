@@ -6,39 +6,33 @@ module.exports = {
 
       switch (analyzedWords) {
         case analyzedWords.score >= 0.66:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-darkgreen'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-darkgreen'></span>");
           textArray.push(colorizedWord);
           break;
         case email.keywords.score >= 0.33 && email.keywords.score < 0.66:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-green'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-green'></span>");
           textArray.push(colorizedWord);
           break;
         case email.keywords.score >= 0 && email.keywords.score < 0.33:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-lightgreen'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-lightgreen'></span>");
           textArray.push(colorizedWord);
           break;
         case email.keywords.score >= -0.33 && email.keywords.score < 0:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-yellow'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-yellow'></span>");
           textArray.push(colorizedWord);
           break;
         case email.keywords.score >= -0.66 && email.keywords.score < -0.33:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-orange'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-orange'></span>");
           textArray.push(colorizedWord);
           break;
         case email.keywords.score >= -1 && email.keywords.score < -0.66:
-          let colorizedWord = analyzedWords.word.wrap(
-            "<span class='score' id='bg-red'></span>"
-          );
+          colorizedWord = jQuery.parseJSON(analyzedWords.word);
+          colorizeWord.wrap("<span class='score' id='bg-red'></span>");
           textArray.push(colorizedWord);
           break;
       }
