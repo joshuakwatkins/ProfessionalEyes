@@ -1,5 +1,5 @@
 module.exports = {
-  format_color: (email) => {
+  format_color: (data) => {
     let textArray = [];
     for (let i = 0; i < data.keywords.length; i++) {
         if (data.keywords[i].score >= 0.66) {
