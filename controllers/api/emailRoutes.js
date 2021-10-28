@@ -3,6 +3,7 @@ const analyzeFetch = require("../../utils/analyzeFetch");
 const { Email, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 const format_color = require("../../utils/helpers");
+const profanityFetch = require("../../utils/profanity");
 
 router.post("/cleanse", withAuth, async (req, res) => {
   try {
@@ -19,7 +20,7 @@ router.post("/cleanse", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
   const toClean = req.body.body;
-  const compArr = toClean.split(" ");
+  const compArr = await profanityFetch(toClean);
   const wordAnalysis = await analyzeFetch(toClean);
   const colorSpans = await format_color(wordAnalysis);
 
