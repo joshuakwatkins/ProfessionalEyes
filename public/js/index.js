@@ -7,5 +7,5 @@ function copyMe() {
     navigator.clipboard.writeText(copyText.value);
 
     //Alert the copied text
-  alert("Copied the text: " + copyText.value);
+  alert("Copied your revised email");
 }
