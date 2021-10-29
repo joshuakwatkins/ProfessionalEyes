@@ -23,11 +23,11 @@ console.log(partialJoin);
 // .then(response => response.json())
 // .then(data => getNegWords(data))
 
-// function getNegWords (data) { 
-// for (var i=0; i<data.keywords.length; i++) {
-//     if (data.keywords[i].score <= 0) {
-//         negSentiment.push(data.keywords[i].word)
-// }}};
+function getNegWords (data) { 
+for (var i=0; i<data.keywords.length; i++) {
+    if (data.keywords[i].score <= 0) {
+        negSentiment.push(data.keywords[i].word)
+}}};
 // }
 // getSentiment()
 // console.log(negSentiment)
@@ -142,13 +142,13 @@ console.log(partialJoin);
 
 // Testing negative word for synonym fetches.
 
-const fakeText = "I think you're bad and I want to hit you.  I hope you fail and die."
+const fakeText = "You remind me of an ugly fatty and I hate you."
 const fakeTextSplitSynonyms = fakeText.split(" ");
 const fakeTextSplitAntonynms = fakeText.split(" ");
 const newTextSynonyms = [];
 const newTextAntonyms = [];
 
-const negTest = ["bad", "hit", "die", "fail"];
+const negTest = ["ugly", "fatty", "hate"];
 const negFetchURL = [];
 // Set the API keys
 
