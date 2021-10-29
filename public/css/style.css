@@ -6,20 +6,20 @@ div.container {
   padding: 50px;
 }
 
-nav button {
+button.header {
   position: absolute;
   right: 10px;
   top: 5px;
   margin-top: 30px;
 }
 
-button.profile {
-  margin-right: 70px;
+#profile {
+  margin-right: 90px;
   margin-top: 30px;
 }
 
-span.score {
-  font-weight: bolder;
+.form-label {
+  margin-bottom: -0.5rem;
 }
 
 button.clean {
@@ -31,6 +31,7 @@ button.copy {
   position: static;
   background-color: darkblue;
   border-color: black;
+  margin-top: 10px;
 }
 
 div.cardOne {

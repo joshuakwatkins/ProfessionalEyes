@@ -4,12 +4,11 @@
             <label for="exampleFormControlTextarea1" class="form-label">USER INPUT</label>
             <textarea class="form-control" id="emailInput" rows="3"></textarea>
           </div>
-          <div class="col">
+          <div class="col" id='options'>
             OPTIONS
-            <div class="card">
+            <div class="card" style="width: 25rem;">
               <div class="card-body">
                 <div class="form-check">
-                <button class="clean btn btn-primary">Cleanse</button>
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="positiveRadio" checked>
                   <label class="form-check-label" for="flexRadioDefault1">
                     Positive
@@ -20,6 +19,7 @@
                   <label class="form-check-label" for="flexRadioDefault2">
                     Negative
                   </label>
+                <button class="clean btn btn-primary position-absolute bottom-0 end-0">Cleanse</button>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@
                   </p>
                 </div>
               </div>
-              <button class='copy' id='copyEmail'>Copy</button>
+              <button class='btn btn-dark copy' id='copyEmail'>Copy</button>
             </div>
             <div class="col">
               POSITIVE/NEGATIVE
@@ -53,17 +53,8 @@
                   </p>
                 </div>
               </div>
-              <button class='copy' id='copyEmail'>Copy</button>
-               {{#if logged_in}}
-          <a href="/profile">Profile</a> |
-        
-          <button class="btn btn-dark" id="logout">Logout</button>
-          {{else}}
-          <a href="/login">
-          <button class="btn btn-dark">Login</button>
-          </a>
-          {{/if}}
+              <button class='btn btn-dark copy' id='copyEmail'>Copy</button>
             </div>
           </div>
         </div>
-  <script src="/public/js/index.js"></script>
+  <script src="js/index.js"></script>
