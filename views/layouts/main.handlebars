@@ -29,68 +29,7 @@
             </div>
           </nav>
      </header>
-  </div>
-
-    <div class="container">
-        <div class="row align-items-start">
-          <div class="col mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">USER INPUT</label>
-            <textarea class="form-control" id="emailInput" rows="3"></textarea>
-          </div>
-          <div class="col">
-            OPTIONS
-            <div class="card">
-              <div class="card-body">
-                <div class="form-check">
-                <button class="clean btn btn-primary">Cleanse</button>
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="positiveRadio" checked>
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Positive
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="negativeRadio">
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Negative
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-end">
-            <div class="col">
-              ANALYSIS
-              <div class="card border border-secondary">
-                <div class="card-body cardOne">
-                  <p id='analyticalOutput'>
-                  </p>
-                  </div>
-              </div>
-            </div>
-            <div class="col">
-              NEUTRAL
-              <div class="card border border-primary">
-                <div class="card-body cardTwo">
-                  <p id='neutralOutput'>
-                  </p>
-                </div>
-              </div>
-              <button class='copy' id='copyEmail'>Copy</button>
-            </div>
-            <div class="col">
-              POSITIVE/NEGATIVE
-              <div class="card border border-danger">
-                <div class="card-body cardThree">
-                  <p id='emotionalOutput'>
-                  </p>
-                </div>
-              </div>
-              <button class='copy' id='copyEmail'>Copy</button>
-            </div>
-          </div>
-        </div>
-  <script src="/public/js/index.js"></script>    
+  </div>   
   {{#if logged_in}}
   <script src="/public/js/logout.js"></script>
   {{/if}}
