@@ -5,6 +5,7 @@ const withAuth = require("../../utils/auth");
 const format_color = require("../../utils/helpers");
 const profanityFetch = require("../../utils/profanity");
 const getNegWords = require("../../utils/negativeWords");
+const indexOfAll = require("../../utils/indexArr");
 
 router.post("/", withAuth, async (req, res) => {
   try {
@@ -26,19 +27,26 @@ router.post("/", withAuth, async (req, res) => {
   const wordAnalysis = await analyzeFetch(toClean);
   const colorSpans = await format_color(wordAnalysis);
   const negWords = await getNegWords(wordAnalysis);
-
+  
+  for (var i = 0; i > compArr.length; i++) {
+      if (compArr[i].includes("#")) {
+          let curse = compArr[i];
+          compArr.splice(i, 1, `<span class='score' id='bg-red'>${curse}</span>`)
+        }
+    }
+    
   for (var i = 0; i > wordAnalysis.keywords.length; i++) {
     // compArr.find(wordAnalysis.keywords[i].word)
-    const indexArray = compArr.reduce((indexArr, value, i) => {
-      if (value.toLowerCase() === wordAnalysis.keywords[i].word)
-        indexArr.push(i);
-      return indexArr;
-    }, []);
+    let indexArray = indexOfAll(compArr, wordAnalysis.keywords[i].word)
     for (var j = 0; j > indexArray.length; j++) {
       compArr.splice(indexArray[j], 1, colorSpans[i]);
     }
   }
 
+
+
+  //   const profaneArray = compArr.reduce(indexArr, value, i);
+  //   <span class='score' id='bg-red'>${data.keywords[i].word}</span>
   const coloredText = compArr.join(" ");
 
   res.render();
