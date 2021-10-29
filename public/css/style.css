@@ -1,39 +1,38 @@
 header {
   position: relative;
-};
+}
 
 div.container {
   padding: 50px;
-};
+}
 
-div button {
+nav button {
   position: absolute;
   right: 10px;
   top: 5px;
   margin-top: 30px;
-};
+}
 
 button.profile {
   margin-right: 70px;
   margin-top: 30px;
-};
+}
 
-bg-darkgreen {
+span.score {
   font-weight: bolder;
-};
+}
 
-bg-lightgreen {
-  font-weight: bolder;
-};
+button.clean {
+  background-color: darkblue;
+  border-color: black;
+}
 
-bg-green {
-  font-weight: bolder;
-};
+button.copy {
+  position: static;
+  background-color: darkblue;
+  border-color: black;
+}
 
-bg-yellow {
-  font-weight: bolder;
-};
-
-bg-red {
-  font-weight: bolder;
+div.cardOne {
+  margin-top: 100px;
 }

@@ -4,22 +4,19 @@
   </div>
 </div>
 
-{{#if emails.length}}
-  <div class="col-md-6 email-list">
-    <h3>Saved emails:</h3>
+<div class="col-md-6 email-list">
+  <h3>{{emails.length}} Saved emails:</h3>
 
     {{#each emails as |email|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/email/{{email.id}}">{{email.name}}</a></h4>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{email.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger" data-id="{{email.id}}">REMOVE</button>
       </div>
     </div>
     {{/each}}
   </div>
-  {{/if}}
 </div>
 
 <script src="./js/profile.js"></script>
