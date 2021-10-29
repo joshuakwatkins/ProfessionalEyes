@@ -22,14 +22,15 @@
         
           <button class="btn btn-dark" id="logout">Logout</button>
           {{else}}
-          <a href="/views/login.handlebars">
+          <a href="/login">
           <button class="btn btn-dark">Login</button>
           </a>
           {{/if}}
             </div>
           </nav>
      </header>
-  </div>   
+  </div>  
+  {{{body}}} 
   {{#if logged_in}}
   <script src="/public/js/logout.js"></script>
   {{/if}}
