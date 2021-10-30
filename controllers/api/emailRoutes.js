@@ -7,11 +7,31 @@ const profanityFetch = require("../../utils/profanity");
 const getNegWords = require("../../utils/negativeWords");
 // const indexOfAll = require("../../utils/indexArr");
 // const fetch = require("node-fetch");
+const sequelize = require("sequelize");
 
-router.post("/emails", withAuth, async (req, res) => {
+router.put("/emails", withAuth, async (req, res) => {
   try {
-    console.log(req.body);
-    res.render("homepage2", { coloredText: req.body.coloredText });
+    console.log(
+      "\n\n trying to update \n\n",
+      req.body.coloredText,
+      req.session
+    );
+    const cleanseEdit = await User.update(
+      {
+        cleansed_input: req.body.coloredText,
+      },
+      {
+        where: {
+          id: req.session.user_id,
+        },
+      }
+    );
+    let coloredText = req.body.coloredText;
+    // res.redirect("homepage2", coloredText);
+    if (!cleanseEdit) {
+      res.status(404).json({ message: "Err: something else broke" });
+    }
+    console.log(cleanseEdit);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -34,8 +54,8 @@ router.post("/", withAuth, async (req, res) => {
   }
   const toClean = req.body.emailInput;
   //   console.log(toClean);
-  const compArr = await profanityFetch(toClean);
-  console.log("this is in the email routes", compArr);
+  await profanityFetch(toClean);
+
   //   const wordAnalysis = await analyzeFetch(toClean);
   //   const colorSpans = await format_color(wordAnalysis);
   //   const negWords = await getNegWords(wordAnalysis);
@@ -103,14 +123,14 @@ router.post("/", withAuth, async (req, res) => {
       .then((response) => response.json())
       .then((data) => switchWords(data));
   };
-  negWords.forEach((element) =>
-    negFetchURL.push(
-      "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" +
-        element +
-        "?key=" +
-        thesKey
-    )
-  );
+  //   negWords.forEach((element) =>
+  //     negFetchURL.push(
+  //       "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" +
+  //         element +
+  //         "?key=" +
+  //         thesKey
+  //     )
+  //   );
   negFetchURL.forEach((element) => thesaurusCall(element));
 
   // Setting up arrays for two different spliced text arrays and empty arrays for the synonyms and antonyms.
@@ -215,7 +235,7 @@ router.post("/", withAuth, async (req, res) => {
   console.log(cleanSynonyms);
   console.log(cleanAntonyms);
 
-  res.render("homepage", toClean, coloredText);
+  res.render("homepage2");
 });
 
 module.exports = router;
