@@ -1,13 +1,21 @@
 const router = require("express").Router();
 const { Email, User } = require("../models");
 const withAuth = require("../utils/auth");
-const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 
 router.get("/", async (req, res) => {
   try {
     res.render("homepage", {
       logged_in: req.session.logged_in,
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/cleanse", withAuth, async (req, res) => {
+  try {
+    res.render("homepage2");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -35,8 +43,8 @@ router.get("/profile", withAuth, async (req, res) => {
 
 router.get("/login", (req, res) => {
   //if (req.session.logged_in) {
-    //res.redirect("/profile");
-    //return;
+  //res.redirect("/profile");
+  //return;
   //}
 
   res.render("login");

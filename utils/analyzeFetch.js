@@ -73,7 +73,7 @@ const analyzeFetch = async (toSent) => {
       );
       console.log(
         "this is directly above the for loop",
-        compArr[1].includes("*")
+        compArr[0].includes("*")
       );
       compArr.forEach((element, j) => {
         if (element.includes("*")) {
@@ -114,7 +114,7 @@ const analyzeFetch = async (toSent) => {
       console.log(toSentArr);
 
       fetch("http://localhost:3001/api/emails/emails", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
