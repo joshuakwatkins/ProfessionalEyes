@@ -8,4 +8,4 @@ function copyMe() {
 
     //Alert the copied text
   alert("Copied your revised email");
-}
+};
