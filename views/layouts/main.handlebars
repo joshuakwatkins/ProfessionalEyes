@@ -18,12 +18,16 @@
          <nav>
            <div class="d-flex justify-content-end">
            {{#if logged_in}}
-          <a href="/profile">Profile</a> |
-        
-          <button class="btn btn-dark" id="logout">Logout</button>
+          <a href="/">
+          <button class="btn btn-dark header" id="homepage">Homepage</button>
+          </a>
+          <a href="/profile">
+          <button class="btn btn-dark header" id="profile">Profile</button>
+          </a>
+          <button class="btn btn-dark header" id="logout">Logout</button>
           {{else}}
           <a href="/login">
-          <button class="btn btn-dark">Login</button>
+          <button class="btn btn-dark header">Login</button>
           </a>
           {{/if}}
             </div>

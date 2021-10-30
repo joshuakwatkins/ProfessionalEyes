@@ -1,4 +1,5 @@
-<div class="container">
+<div class='bgImage'>
+  <div class="container">
         <div class="row align-items-start">
           <div class="col mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Name This Email</label>
@@ -6,9 +7,9 @@
             <label for="exampleFormControlTextarea1" class="form-label">USER INPUT</label>
             <textarea class="form-control" id="emailInput" rows="3"></textarea>
           </div>
-          <div class="col">
+          <div class="col" id='options'>
             OPTIONS
-            <div class="card">
+            <div class="card" style="width: 25rem;">
               <div class="card-body">
                 <div class="form-check">
                 <button class="clean btn btn-primary"id="cleanse-btn">Cleanse</button>
@@ -22,12 +23,13 @@
                   <label class="form-check-label" for="flexRadioDefault2">
                     Negative
                   </label>
+                <button class="clean btn btn-primary position-absolute bottom-0 end-0">Cleanse</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row align-items-end">
+        <div class="row">
             <div class="col">
               ANALYSIS
               <div class="card border border-secondary">
@@ -46,7 +48,7 @@
                   </p>
                 </div>
               </div>
-              <button class='copy' id='copyEmail'>Copy</button>
+              <button class='btn btn-dark copy' id='copyEmail'>Copy</button>
             </div>
             <div class="col">
               POSITIVE/NEGATIVE
@@ -56,18 +58,14 @@
                   </p>
                 </div>
               </div>
-              <button class='copy' id='copyEmail'>Copy</button>
-               {{#if logged_in}}
-          <a href="/profile">Profile</a> |
-        
-          <button class="btn btn-dark" id="logout">Logout</button>
-          {{else}}
-          <a href="/login">
-          <button class="btn btn-dark">Login</button>
-          </a>
-          {{/if}}
+              <button class='btn btn-dark copy' id='copyEmail'>Copy</button>
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+</div>
+  <script src="js/index.js"></script>
+=======
   <script src="/js/index.js"></script>
   <script src="/js/profile.js"></script>
+>>>>>>> b5cec7e7ff1686043dbfaabf123969e6751f8c4c
