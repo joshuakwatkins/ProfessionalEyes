@@ -18,15 +18,19 @@
   },
   "homepage": "https://github.com/joshuakwatkins/CleanComm#readme",
   "dependencies": {
-    "bcrpyt": "^2.0.0",
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
     "express-session": "^1.17.2",
     "mysql2": "^2.3.2",
+    "nlpcloud": "^1.0.13",
+    "node-fetch": "^2.0.0",
     "prettier": "^2.4.1",
-    "sequelize": "^6.8.0"
+    "sequelize": "^6.8.0",
+    "spacy": "0.0.4",
+    "wordpos": "^2.1.0"
   }
 }
