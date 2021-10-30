@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Email, User } = require("../models");
 const withAuth = require("../utils/auth");
+const fetch = require('node-fetch')
 
 router.get("/", async (req, res) => {
   try {
