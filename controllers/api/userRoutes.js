@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const { User, Email } = require("../../models");
+const fetch = require('node-fetch')
+
 
 router.post("/", async (req, res) => {
   console.log('something')

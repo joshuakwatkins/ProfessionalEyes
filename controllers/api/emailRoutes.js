@@ -2,10 +2,20 @@ const router = require("express").Router();
 const analyzeFetch = require("../../utils/analyzeFetch");
 const { Email, User } = require("../../models");
 const withAuth = require("../../utils/auth");
-const format_color = require("../../utils/helpers");
+// const { format_color } = require("../../utils/helpers");
 const profanityFetch = require("../../utils/profanity");
 const getNegWords = require("../../utils/negativeWords");
-const indexOfAll = require("../../utils/indexArr");
+// const indexOfAll = require("../../utils/indexArr");
+// const fetch = require("node-fetch");
+
+router.post("/emails", withAuth, async (req, res) => {
+  try {
+    console.log(req.body);
+    res.render("homepage2", { coloredText: req.body.coloredText });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post("/", withAuth, async (req, res) => {
   try {
@@ -23,181 +33,189 @@ router.post("/", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
   const toClean = req.body.emailInput;
+  //   console.log(toClean);
   const compArr = await profanityFetch(toClean);
-  const wordAnalysis = await analyzeFetch(toClean);
-  const colorSpans = await format_color(wordAnalysis);
-  const negWords = await getNegWords(wordAnalysis);
-  
-  for (var i = 0; i > compArr.length; i++) {
-      if (compArr[i].includes("#")) {
-          let curse = compArr[i];
-          compArr.splice(i, 1, `<span class='score' id='bg-red'>${curse}</span>`)
-        }
-    }
-    
-  for (var i = 0; i > wordAnalysis.keywords.length; i++) {
-    // compArr.find(wordAnalysis.keywords[i].word)
-    let indexArray = indexOfAll(compArr, wordAnalysis.keywords[i].word)
-    for (var j = 0; j > indexArray.length; j++) {
-      compArr.splice(indexArray[j], 1, colorSpans[i]);
-    }
-  }
+  console.log("this is in the email routes", compArr);
+  //   const wordAnalysis = await analyzeFetch(toClean);
+  //   const colorSpans = await format_color(wordAnalysis);
+  //   const negWords = await getNegWords(wordAnalysis);
 
+  //   for (var i = 0; i > compArr.length; i++) {
+  //     if (compArr[i].includes("#")) {
+  //       let curse = compArr[i];
+  //       compArr.splice(i, 1, `<span class='score' id='bg-red'>${curse}</span>`);
+  //     }
+  //   }
 
+  //   for (var i = 0; i > wordAnalysis.keywords.length; i++) {
+  //     // compArr.find(wordAnalysis.keywords[i].word)
+  //     let indexArray = indexOfAll(compArr, wordAnalysis.keywords[i].word);
+  //     for (var j = 0; j > indexArray.length; j++) {
+  //       compArr.splice(indexArray[j], 1, colorSpans[i]);
+  //     }
+  //   }
 
   //   const profaneArray = compArr.reduce(indexArr, value, i);
   //   <span class='score' id='bg-red'>${data.keywords[i].word}</span>
-  const coloredText = compArr.join(" ");
-
-  res.render();
+  //   const coloredText = compArr.join(" ");
+  //   debugger;
+  //   console.log(coloredText);
 
   // moved into utils/analyze.fetch
-  const urlArr = [];
-  const toCleanArr = toClean.split(" ")
-  toCleanArr.forEach(element => urlArr.push("%20" + element));
-  const urlString = urlArr.join("")
-  fetch("https://twinword-sentiment-analysis.p.rapidapi.com/analyze/?text="+urlString, {
-      "method": "GET",
-      "headers": {
-          "x-rapidapi-key": "0c86673a91msh18102740756c84dp1c7dc9jsn4a761e4a08c1",
-          "x-rapidapi-host": "twinword-sentiment-analysis.p.rapidapi.com"
-      }
-  })
-  .then(response => response.json()).then(data => {
-    function getNegWords (data) { 
-      for (var i=0; i<data.keywords.length; i++) {
-          if (data.keywords[i].score <= 0) {
-              negWords.push(data.keywords[i].word)
-      }}};
-      wordValues = data.keywords
-      coloredWords = []
+  //   const urlArr = [];
+  //   const toCleanArr = toClean.split(" ");
+  //   toCleanArr.forEach((element) => urlArr.push("%20" + element));
+  //   const urlString = urlArr.join("");
+  //   fetch(
+  //     "https://twinword-sentiment-analysis.p.rapidapi.com/analyze/?text=" +
+  //       urlString,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "x-rapidapi-key": "0c86673a91msh18102740756c84dp1c7dc9jsn4a761e4a08c1",
+  //         "x-rapidapi-host": "twinword-sentiment-analysis.p.rapidapi.com",
+  //       },
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       function getNegWords(data) {
+  //         for (var i = 0; i < data.keywords.length; i++) {
+  //           if (data.keywords[i].score <= 0) {
+  //             negWords.push(data.keywords[i].word);
+  //           }
+  //         }
+  //       }
+  //       wordValues = data.keywords;
 
-      for (var i = 0; i < wordValues.length; i++) {
+  //       for (var i = 0; i < wordValues.length; i++) {}
+  //     });
 
-      }
-  })
+  const negFetchURL = [];
+  // Set the API keys
 
-const negFetchURL = [];
-// Set the API keys
+  const thesKey = "0d6cde76-d8a1-48cd-9a08-41859be0f16f";
 
-const thesKey = "0d6cde76-d8a1-48cd-9a08-41859be0f16f";
+  // Make the thesaurus fetch call.
 
-// Make the thesaurus fetch call.
+  const thesaurusCall = (element) => {
+    fetch(element)
+      .then((response) => response.json())
+      .then((data) => switchWords(data));
+  };
+  negWords.forEach((element) =>
+    negFetchURL.push(
+      "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" +
+        element +
+        "?key=" +
+        thesKey
+    )
+  );
+  negFetchURL.forEach((element) => thesaurusCall(element));
 
-const thesaurusCall = (element) => {
-fetch(element)
-.then(response => response.json())
-.then(data => switchWords(data))
-}
-negWords.forEach((element) => negFetchURL.push("https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" + element +"?key=" + thesKey));
-negFetchURL.forEach((element) => thesaurusCall(element))
+  // Setting up arrays for two different spliced text arrays and empty arrays for the synonyms and antonyms.
 
-// Setting up arrays for two different spliced text arrays and empty arrays for the synonyms and antonyms.
+  const toCleanSynonyms = toClean.split(" ");
+  const toCleanAntonynms = toClean.split(" ");
+  const cleanSynonyms = [];
+  const cleanAntonyms = [];
 
-const toCleanSynonyms = toClean.split(" ");
-const toCleanAntonynms = toClean.split(" ");
-const cleanSynonyms = [];
-const cleanAntonyms = [];
+  const switchWords = (data) => {
+    if (data[0].meta.syns.length > 0 && data[0].meta.ants.length > 0) {
+      const randomArray = Math.floor(Math.random() * data[0].meta.syns.length);
+      const randomWord = Math.floor(
+        Math.random() * data[0].meta.syns[randomArray].length
+      );
+      const randomArrayA = Math.floor(Math.random() * data[0].meta.ants.length);
+      const randomWordA = Math.floor(
+        Math.random() * data[0].meta.ants[randomArrayA].length
+      );
 
-
-const switchWords = (data) => {
-
-    if (data[0].meta.syns.length>0 && data[0].meta.ants.length>0){
-
-    const randomArray = Math.floor(Math.random()*data[0].meta.syns.length);
-    const randomWord = Math.floor(Math.random()*data[0].meta.syns[randomArray].length);
-    const randomArrayA = Math.floor(Math.random()*data[0].meta.ants.length);
-    const randomWordA = Math.floor(Math.random()*data[0].meta.ants[randomArrayA].length);
-    
-    const switchingWords = 
-    {
+      const switchingWords = {
         hwi: data[0].hwi.hw,
         synonym: data[0].meta.syns[randomArray][randomWord],
-        antonym: data[0].meta.ants[randomArrayA][randomWordA]
-    };
-    
-    const replaceTheText = (element) => {
+        antonym: data[0].meta.ants[randomArrayA][randomWordA],
+      };
+
+      const replaceTheText = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanSynonyms.indexOf(element)
-            toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym)
+          const indexNum = toCleanSynonyms.indexOf(element);
+          toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym);
         }
-    }
-    toCleanSynonyms.forEach((element) => replaceTheText(element))
-    
-    const replaceTheTextA = (element) => {
+      };
+      toCleanSynonyms.forEach((element) => replaceTheText(element));
+
+      const replaceTheTextA = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanAntonynms.indexOf(element)
-            toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym)
+          const indexNum = toCleanAntonynms.indexOf(element);
+          toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym);
         }
-    }
-    toCleanAntonynms.forEach((element) => replaceTheTextA(element))
+      };
+      toCleanAntonynms.forEach((element) => replaceTheTextA(element));
+    } else if (data[0].meta.syns.length > 0 && data[0].meta.ants.length <= 0) {
+      const randomArray = Math.floor(Math.random() * data[0].meta.syns.length);
+      const randomWord = Math.floor(
+        Math.random() * data[0].meta.syns[randomArray].length
+      );
 
-    } else if (data[0].meta.syns.length>0 && data[0].meta.ants.length<=0) {
-
-    const randomArray = Math.floor(Math.random()*data[0].meta.syns.length);
-    const randomWord = Math.floor(Math.random()*data[0].meta.syns[randomArray].length);
-
-    const switchingWords = 
-    {
+      const switchingWords = {
         hwi: data[0].hwi.hw,
         synonym: data[0].meta.syns[randomArray][randomWord],
-        antonym: "There are no antonyms for this word"
-    };
-    const replaceTheText = (element) => {
+        antonym: "There are no antonyms for this word",
+      };
+      const replaceTheText = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanSynonyms.indexOf(element)
-            toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym)
+          const indexNum = toCleanSynonyms.indexOf(element);
+          toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym);
         }
-    }
-    toCleanSynonyms.forEach((element) => replaceTheText(element))
+      };
+      toCleanSynonyms.forEach((element) => replaceTheText(element));
 
-    const replaceTheTextA = (element) => {
+      const replaceTheTextA = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanAntonynms.indexOf(element)
-            toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym)
+          const indexNum = toCleanAntonynms.indexOf(element);
+          toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym);
         }
-    }
-    toCleanAntonynms.forEach((element) => replaceTheTextA(element))
+      };
+      toCleanAntonynms.forEach((element) => replaceTheTextA(element));
+    } else if (data[0].meta.syns.length <= 0 && data[0].meta.ants.length > 0) {
+      const randomArrayA = Math.floor(Math.random() * data[0].meta.ants.length);
+      const randomWordA = Math.floor(
+        Math.random() * data[0].meta.ants[randomArrayA].length
+      );
 
-    } else if (data[0].meta.syns.length<=0 && data[0].meta.ants.length>0) {
-
-    const randomArrayA = Math.floor(Math.random()*data[0].meta.ants.length);
-    const randomWordA = Math.floor(Math.random()*data[0].meta.ants[randomArrayA].length);
-
-    const switchingWords = 
-    {
+      const switchingWords = {
         hwi: data[0].hwi.hw,
         synonym: "There are no synonyms for this word.",
-        antonym: data[0].meta.ants[randomArrayA][randomWordA]
-    };
-    const replaceTheText = (element) => {
+        antonym: data[0].meta.ants[randomArrayA][randomWordA],
+      };
+      const replaceTheText = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanSynonyms.indexOf(element)
-            toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym)
+          const indexNum = toCleanSynonyms.indexOf(element);
+          toCleanSynonyms.splice(indexNum, 1, switchingWords.synonym);
         }
-    }
-    toCleanSynonyms.forEach((element) => replaceTheText(element))
+      };
+      toCleanSynonyms.forEach((element) => replaceTheText(element));
 
-    const replaceTheTextA = (element) => {
+      const replaceTheTextA = (element) => {
         if (element === switchingWords.hwi) {
-            const indexNum = toCleanAntonynms.indexOf(element)
-            toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym)
+          const indexNum = toCleanAntonynms.indexOf(element);
+          toCleanAntonynms.splice(indexNum, 1, switchingWords.antonym);
         }
+      };
+      toCleanAntonynms.forEach((element) => replaceTheTextA(element));
+    } else if (data[0].meta.syns.length <= 0 && data[0].meta.ants.length <= 0) {
+      console.log("There are no synonyms or antonyms.");
     }
-    toCleanAntonynms.forEach((element) => replaceTheTextA(element))
 
-}  else if (data[0].meta.syns.length<=0 && data[0].meta.ants.length<=0) {
-    console.log("There are no synonyms or antonyms.")
-}; 
+    cleanSynonyms.push = toCleanSynonyms.join(" ");
+    cleanAntonyms.push = toCleanAntonynms.join(" ");
+  };
 
-cleanSynonyms.push = toCleanSynonyms.join(" ");
-cleanAntonyms.push = toCleanAntonynms.join(" ");
-}
+  console.log(cleanSynonyms);
+  console.log(cleanAntonyms);
 
-console.log(cleanSynonyms)
-console.log(cleanAntonyms)
-
-  res.render("homepage", toClean);
+  res.render("homepage", toClean, coloredText);
 });
 
 module.exports = router;
