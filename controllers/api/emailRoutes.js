@@ -38,23 +38,51 @@ router.put("/emails", withAuth, async (req, res) => {
 });
 
 router.post("/", withAuth, async (req, res) => {
+  console.log(req.session);
+  var newEmail = null;
+
   try {
-    const newEmail = Email.create({
+    newEmail = Email.create({
       name: req.body.name,
       body: req.body.emailInput,
       user_id: req.session.user_id,
     });
+
+    console.log(newEmail);
+
     if (!newEmail) {
-      res.status(404).json({ message: "Failed to analyze or save your text." });
-    } else {
-      res.status(200).json(newEmail);
+      res.status(500).json({ message: "Failed to analyze or save your text." });
+      return;
     }
   } catch (err) {
     res.status(500).json(err);
+    return;
   }
   const toClean = req.body.emailInput;
   //   console.log(toClean);
-  await profanityFetch(toClean);
+
+  console.log(
+    "TO CLEAN ---------------------------------------------------------------"
+  );
+  console.log(toClean);
+
+  var my_profanity = await profanityFetch(toClean);
+
+  // res.render("homepage2");
+  var analysis = await analyzeFetch(my_profanity.result);
+
+  const cleanseEdit = await User.update(
+    {
+      cleansed_input: analysis,
+    },
+    {
+      where: {
+        id: req.session.user_id,
+      },
+    }
+  );
+
+  res.status(200).json(analysis);
 
   //   const wordAnalysis = await analyzeFetch(toClean);
   //   const colorSpans = await format_color(wordAnalysis);
@@ -234,8 +262,6 @@ router.post("/", withAuth, async (req, res) => {
 
   console.log(cleanSynonyms);
   console.log(cleanAntonyms);
-
-  res.render("homepage2");
 });
 
 module.exports = router;

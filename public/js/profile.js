@@ -13,7 +13,11 @@ const newFormHandler = async (event) => {
       },
     });
 
+    //probably do some garbage like in here
+    //https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams
     if (response.ok) {
+      console.log(response);
+      document.getElementById("analyticalOutput").innerHTML = response.text();
       // document.location.replace("/cleanse");
     } else {
       alert("Failed to create email");

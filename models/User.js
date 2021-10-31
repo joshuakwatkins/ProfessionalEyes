@@ -6,6 +6,11 @@ class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
+
+  updateCleansedInput(input) {
+    this.cleansed_input = input;
+    this.save();
+  }
 }
 
 User.init(
@@ -29,7 +34,7 @@ User.init(
       },
     },
     cleansed_input: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     password: {
