@@ -101,7 +101,7 @@ const analyzeFetch = async (toSent) => {
 
     console.log("+++++++++++++++++++++++++++++++++++++");
     console.log(dasReturn);
-    return dasReturn;
+    return dasReturn.text();
 };
 
 module.exports = analyzeFetch;
