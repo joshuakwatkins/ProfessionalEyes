@@ -37,3 +37,25 @@ button.copy {
   border-color: black;
   margin-top: 10px;
 }
+
+#bg-red {
+  background-color: red;
+}
+#bg-orange {
+  background-color: orange;
+}
+#bg-yellow {
+  background-color: yellow;
+}
+
+#bg-lightgreen {
+  background-color: lightgreen;
+}
+
+#bg-green {
+  background-color: green;
+}
+
+#bg-darkgreen {
+  background-color: darkgreen;
+}
