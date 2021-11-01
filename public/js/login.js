@@ -30,14 +30,11 @@ const signupFormHandler = async (event) => {
   console.log("sign up handler", name, email, password);
   if (name && email && password) {
     console.log("works?");
-    const response = await fetch(
-      "https://professionaleyes.herokuapp.com/api/user",
-      {
-        method: "POST",
-        body: JSON.stringify({ name, email, password }),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const response = await fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify({ name, email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
     console.log(response);
     if (response.ok) {
       document.location.replace("/");
