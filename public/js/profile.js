@@ -1,23 +1,27 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector("#email-name").value.trim();
-  const emailInput = document.querySelector("#email-input").value.trim();
+  const name = document.querySelector("#emailName").value.trim();
+  const emailInput = document.querySelector("#emailInput").value.trim();
 
   if (name && emailInput) {
     const response = await fetch(`/api/emails`, {
       method: "POST",
-      body: { name, emailInput },
+      body: JSON.stringify({ name, emailInput }),
       headers: {
         "Content-Type": "application/json",
       },
+    }).then(function(response) {
+      return response.json();
     });
 
-    if (response.ok) {
-      document.location.replace("/profile");
-    } else {
-      alert("Failed to create email");
-    }
+    //probably do some garbage like in here
+    //https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams
+   
+     
+      document.getElementById("analyticalOutput").innerHTML = response;
+      // document.location.replace("/cleanse");
+    
   }
 };
 
@@ -38,9 +42,9 @@ const delButtonHandler = async (event) => {
 };
 
 document
-  .querySelector(".new-email-form")
-  .addEventListener("submit", newFormHandler);
+  .querySelector("#cleanse-btn")
+  .addEventListener("click", newFormHandler);
 
-document
-  .querySelector(".email-list")
-  .addEventListener("click", delButtonHandler);
+// document
+//   .querySelector(".email-list")
+//   .addEventListener("click", delButtonHandler);
