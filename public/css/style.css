@@ -1,5 +1,6 @@
 header {
   position: relative;
+  display: flex;
 }
 
 div.container {
@@ -7,20 +8,23 @@ div.container {
 }
 
 button.header {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-  margin-top: 30px;
+  justify-content: right;
+  align-items: center;
+  margin: 15px;
 }
 
 #profile {
-  margin-right: 90px;
-  margin-top: 30px;
+  /* margin-right: 90px;
+  margin-top: 30px; */
 }
 
 #homepage {
-  position: relative;
-  left: 620px;
+  /* position: relative;
+  left: 620px; */
+}
+
+#professionalTitle {
+  display: flex;
 }
 
 .form-label {
